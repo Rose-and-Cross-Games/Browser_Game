@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Тест регистрации</title>
+    <style>
+        body {
+            background: #0a0e27;
+            color: #0f0;
+            font-family: monospace;
+            padding: 20px;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #0f0;
+            background: rgba(0, 255, 0, 0.1);
+        }
+        .error {
+            color: #f00;
+            border-color: #f00;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background: #0f0;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест регистрации и входа</h1>
+    
+    <div>
+        <h3>Регистрация</h3>
+        <button onclick="testRegister()">Тестовая регистрация</button>
+    </div>
+    
+    <div>
+        <h3>Вход</h3>
+        <button onclick="testLogin()">Тестовый вход</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <script>
+        const testEmail = 'test_' + Date.now() + '@example.com';
+        const testPassword = 'test123456';
+        
+        async function testRegister() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Регистрация...</p>';
+            
+            try {
+                const response = await fetch('api/register.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: testEmail,
+                        password: testPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="result">
+                            <h3>✅ Регистрация успешна!</h3>
+                            <p>User ID: ${data.user_id}</p>
+                            <p>Email: ${testEmail}</p>
+                            <p>Message: ${data.message}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result error">
+                            <h3>❌ Ошибка регистрации</h3>
+                            <p>${data.message}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Ошибка сети</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function testLogin() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Вход...</p>';
+            
+            try {
+                const response = await fetch('api/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: testEmail,
+                        password: testPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <div class="result">
+                            <h3>✅ Вход успешен!</h3>
+                            <p>Email: ${testEmail}</p>
+                            <p>Message: ${data.message}</p>
+                            <p>Tutorial progress: ${data.tutorial_progress}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result error">
+                            <h3> Ошибка входа</h3>
+                            <p>${data.message}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Ошибка сети</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

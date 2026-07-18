@@ -1,0 +1,12 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+
+# Перенаправление API запросов
+RewriteRule ^api/([a-z-]+)$ api/$1.php [L]
+
+# Главная страница
+
+
+# Ошибки
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php

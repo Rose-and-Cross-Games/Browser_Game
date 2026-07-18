@@ -1,0 +1,11 @@
+body{
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(230px,35vmin);
+    gap: 50px;
+    background: 
+    linear-gradient(#0000,rgb(50 50 50 / 88%)),
+    url(Pinpng.com-stalker.png) center/100% 100% no-repeat;
+}

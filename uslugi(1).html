@@ -1,0 +1,154 @@
+<?php
+define('PROTECTOR', 1);
+
+// Подключение необходимых файлов
+$path = $_SERVER["DOCUMENT_ROOT"] . '/'; // ПУТЬ
+$textl = 'Покупка Советских рублей';
+
+include($path . 'files/core.php');
+include($path . 'files/head.php');
+include($path . 'files/zag.php');
+
+// Функция для предотвращения SQL-инъекций
+function escape($value, $db) {
+    return mysqli_real_escape_string($db, $value);
+}
+
+// Проверка наличия данных о донате
+$usrId = escape($udata['id'], $db);
+$reqUsersData = $db->query("SELECT * FROM users_data WHERE usr='$usrId' AND type='donate' LIMIT 1");
+
+if ($reqUsersData->num_rows == 1) {
+    $usersData = $reqUsersData->fetch_assoc();
+    $count = $usersData['data'];
+
+    // Проверка наличия акции
+    $magQuery = "SELECT * FROM users_data WHERE type='action' AND usr='$usrId' AND (data LIKE '%,$count,%') LIMIT 1";
+    $magResult = $db->query($magQuery);
+    
+    if ($magResult->num_rows > 0) {
+        $mag = $magResult->fetch_assoc();
+        $explode = explode(',', $mag['data']);
+        
+        if ($explode[1] == $count) {
+            $db->query("DELETE FROM users_data WHERE type='donate' AND usr='$usrId'");
+            $explode[2] = 1;
+            $implode = implode(',', $explode);
+
+            $userId = escape($user_id, $db);
+            $magId = escape($mag['users_data_id'], $db);
+            
+            $db->query("INSERT INTO users_data (usr, type, data) VALUES ('$userId', '$magId', '$implode')");
+            $db->query("UPDATE users_data SET data='$implode' WHERE users_data_id='$magId' LIMIT 1");
+            
+            header("Location: /actions/{$explode[3]}?mod=act");
+            exit;
+        } else {
+            $db->query("DELETE FROM users_data WHERE (type='action' OR type='donate') AND usr='$usrId'");
+
+            switch ($count) {
+                case '100': $almaz = 100; break;
+                case '300': $almaz = 300; break;
+                case '500': $almaz = 600; break;
+                case '1000': $almaz = 1300; break;
+                case '3000': $almaz = 4000; break;
+                case '5000': $almaz = 7000; break;
+                case '10000': $almaz = 15000; break;
+                default: $almaz = $count; break;
+            }
+
+            $Alert->addLogAdmin("Купил $count/$almaz болтов", 'action');
+            $db->query("UPDATE users SET bolt = bolt + '$almaz' WHERE id = '$userId'");
+            $Log->addLog("Игрок {$udata['name']}[ID:{$udata['id']}] купил $count/$almaz Болтов", 'send');
+            
+            header("Location: ?");
+            exit;
+        }
+    }
+}
+
+if (isset($_GET['mod']) && $_GET['mod'] == 'buy') {
+    $count = isset($_GET['count']) ? intval($_GET['count']) : 0;
+    $cenaUan = round($count * 0.1);
+    $cenaRub = round($count * 0.25);
+    $cenaBucks = round($count * 0.0037);
+    ?>
+    <h5>Выберите способ оплаты</h5>
+    <div class="center block">
+        <a href="/paywk/index.php?count=<?php echo htmlspecialchars($count, ENT_QUOTES, 'UTF-8'); ?>" class="button w50 mt10">Wapkassa</a>
+    </div>
+    <?php
+} else {
+    ?>
+    <div class="bod" style="padding-top:0;">
+        <div class="line">
+            <center>
+                <b style="font-size:1.2em;color:#ec9513">Донат / Пополнение Советских рублей</b>
+            </center>
+        </div>
+        <div class="line" style="border: 1px solid #333;">
+            <div id="edit_course">
+                <img src="/img/russia.png" style="vertical-align: bottom;">
+                <b style="font-size: 1.2em; color: Yellow">Российская карта</b>
+            </div>
+        </div>
+        <div class="npc_text" style="border: 1px solid #333; font-family: monospace; font-size: 1.1em;">
+            <div id="edit_course">
+                <img src="/img/sberbank.png" style="vertical-align: bottom;">
+                <b style="font-size: 1.05em">Сбер:</b>
+                <b style="color: #ddd;">
+                    <span style="font-size: 1.05em">+7 915 260-20-14</span>
+                </b>
+                <br>
+                <b style="font-size: 1.05em">Курс Советской валюты:</b>
+                <br>
+                <b style="color: orange;">
+                    1
+                    <span style="font-size: 0.9em">RU Рубль</span>
+                </b>
+                =
+                <b style="color: gold">1</b>
+                <br>
+                <b style="color: orange;">
+                    1
+                    <span style="font-size: 0.9em">BR Рубль</span>
+                </b>
+                =
+                <b style="color: gold">15</b>
+                <br>
+                <b style="font-size: 1.05em">При пополнении от 1.000₽ бонус 10%:</b>
+                <b style="color: lime;">ДА</b>
+                <br>
+                <b style="font-size: 1.05em">При пополнении от 5.000₽ бонус 25%:</b>
+                <b style="color: lime;">ДА</b>
+            </div>
+        </div>
+        <div class="alert alert-warning p-2">
+            <div class="alert-title">После пополнения счета:</div>
+            <div>
+                Сообщите Администратору время и сумму пополнения, и ваша донат-валюта будет зачислена в самое ближайшее время.
+                <br>
+                Если вы правильно указали сумму и время - это ускорит срок зачисления.
+                <br>
+                <br>
+                Пример правильной заявки:
+                <br>
+                <b>Пополнил 500₽ в 15:00 через Сбер</b>
+            </div>
+        </div>
+        <div class="npc_text" style="border: 1px solid #333;">
+            <img src="/img/avatar/unik/3.jpg" height="28" style="vertical-align: bottom; float: left; padding-right: 5px;">
+            <b style="font-size: 1.2em; color: orange;">Чеба</b>
+            <br>
+            Администратор
+            <br>
+            <div>
+                <a href="/gamer/msg.php?mod=outmsg&id=3" class="input_window" style="margin-top: 5px;">Связаться с Администратором</a>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+include($path . 'files/down.php');
+?>

@@ -1,0 +1,575 @@
+/* STALKER GAMMA PDA Theme */
+:root {
+    --smart-bg: #0a0a0a;
+    --smart-screen: #1a1a1a;
+    --smart-green: #00ff00;
+    --smart-yellow: #ffff00;
+    --smart-blue: #0088ff;
+    --smart-text: #e0e0e0;
+    --smart-border: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: var(--smart-text);
+    font-family: "Roboto Mono", monospace;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Экран загрузки SMART */
+.smart-boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.boot-loader {
+    text-align: center;
+    color: var(--smart-green);
+    font-family: "Roboto Mono", monospace;
+}
+
+.boot-logo {
+    margin-bottom: 3rem;
+    animation: textFlicker 3s infinite;
+}
+
+.logo-text {
+    font-size: 3rem;
+    font-weight: bold;
+    display: block;
+    text-shadow: 0 0 10px var(--smart-green);
+    letter-spacing: 2px;
+}
+
+.logo-subtext {
+    font-size: 1rem;
+    color: var(--smart-text);
+    display: block;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background: #222;
+    border: 1px solid var(--smart-green);
+    border-radius: 3px;
+    margin: 2rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--smart-green) 0%, #7fff00 100%);
+    width: 0%;
+    transition: width 0.8s ease-out;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.boot-messages {
+    margin: 1rem 0;
+    min-height: 20px;
+    font-size: 0.9rem;
+}
+
+.boot-message {
+    color: var(--smart-text);
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+.boot-version {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+}
+
+/* Стили для переходов между разделами */
+.section-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3 ease;
+    min-height: 400px;
+}
+
+.section-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Индикатор загрузки */
+.section-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-attachment: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader-content {
+    text-align: center;
+    background: rgba(0, 20, 0, 0.9);
+    padding: 30px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #333;
+    border-top: 3px solid #00ff00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+.loade-text {
+    color: #00ff00;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Анимация появления/исчезновения */
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.slide-out-left {
+    animation: slideOutLeft 0,4s ease forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0,4s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideOutLeft {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(-50px); }
+}
+
+@keyframes slideOutRight {
+    from { opacity: 1; transform: translateX(50px); }
+    to { opacity: 0; transform: translateX(0); }
+}
+
+/* Основной интерфейс SMART */
+.smart-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--smart-bg);
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto Mono", monospace;
+    opacity: 1;
+}
+
+.smart-header {
+    background: #111;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--smart-border);
+}
+
+.smart-time {
+    color: var(--smart-green);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.smart-battery {
+    color: var(--smart-text);
+    font-size: 0.9rem;
+}
+
+.smart-main {
+    flex: 1;
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.smart-sidebar {
+    width: 200px;
+    background: #111;
+    border: 1px solid var(--smart-border);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.smart-status {
+    margin-bottom: 2rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    color: var(--smart-text);
+}
+
+.status-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.status-value {
+    font-weight: bold;
+}
+
+.smart-quicknav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quicknav-btn {
+    background: #222;
+    border: 1px solid var(--smart-border);
+    color: var(--smart-text);
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.quicknav-btn:hover {
+    border-color: var(--smart-green);
+    background: #333;
+}
+
+.smart-content {
+    flex: 1;
+    background: #111;
+    border: 1px solid var(--smart-border);
+    border-radius: 5px;
+    padding: 2rem;
+}
+
+.desktop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+}
+
+.desktop-shortcut {
+    background: #222;
+    border: 1px solid var(--smart-border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.desktop-shortcut:hover {
+    border-color: var(--smart-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.shortcut-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.shortcut-label {
+    color: var(--smart-text);
+    font-size: 0.9rem;
+}
+
+.smart-footer {
+    background: #111;
+    padding: 1rem;
+    border-top: 1px solid var(--smart-border);
+}
+
+.smart-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tab-btn {
+    background: #222;
+    border: 1px solid var(--smart-border);
+    color: var(--smart-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2 ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: var(--smart-green);
+    color: #000;
+    border-color: var(--smart-green);
+}
+
+/* Контент вкладок */
+.tab-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--smart-bg);
+    padding: 2rem;
+    z-index: 900;
+    display: none;
+    opacity: 0;
+}
+
+.back-btn {
+    background: #222;
+    border: 1px solid var(--smart-border);
+    color: var(--smart-text);
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.back-btn:hover {
+    border-color: var(--smart-green);
+    color: var(--smart-green);
+    transform: translateX(-5px);
+}
+
+#current-tab-content {
+    background: #111;
+    border: 1px solid var(--smart-border);
+    border-radius: 8px;
+    padding: 2rem;
+    min-height: 400px;
+}
+
+/* Утилиты */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: flex !important;
+}
+
+.block-visible {
+    display: block !important;
+}
+
+.opacity-0 {
+    opacity: 0 !important;
+}
+
+.opacity-100 {
+    opacity: 1 !important;
+}
+
+/* Стили для скроллбара */
+.smart-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.smart-content::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 4px;
+}
+
+.smart-content::-webkit-scrollbar-thumb {
+    background: var(--smart-green);
+    border-radius: 4px;
+}
+
+.smart-content::-webkit-scrollbar-thumb:hover {
+    background: #00cc00;
+}
+
+/* Эффект сканирования для фона */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(transparent 24px, rgba(0, 255, 0, 0.03) 25px),
+        linear-gradient(90deg, transparent 24px, rgba(0, 255, 0, 0.03) 25px);
+    background-size: 25px 25px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Эффект шума */
+
+
+/* Анимации */
+@keyframes textFlicker {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px var(--smart-green);
+    }
+    25% {
+        opacity: 0.9;
+        text-shadow: 0 0 8px var(--smart-green);
+    }
+    50% {
+        opacity: 0.8;
+        text-shadow: 0 05px var(--smart-green);
+    }
+    75% {
+        opacity: 0.9;
+        text-shadow: 0 0 8px var(--smart-green);
+    }
+}
+
+@keyframes progressPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes bootProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Применение анимаций */
+.progress-fill {
+    animation: progressPulse 2s infinite;
+}
+
+.notification.show {
+    animation: slideInRight 0.3s ease forwards;
+}
+
+.notification.hide {
+    animation: slideOutRight 0.3s ease forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .smart-main {
+        flex-direction: column;
+    }
+
+    .smart-sitebar {
+        width: 100%;
+        order: 2;
+    }
+
+    .smart-content {
+        order: 1;
+    }
+
+    .desctop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,10 @@
+[09-Jul-2026 11:35:32 Europe/Moscow] Register error: Ошибка поиска пользователя: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "id" does not exist
+LINE 1: SELECT id, email, password_hash, nickname, gender, tutorial_...
+               ^
+[09-Jul-2026 11:41:11 Europe/Moscow] Register error: Ошибка поиска пользователя: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "id" does not exist
+LINE 1: SELECT id, email, password_hash, nickname, gender, tutorial_...
+               ^
+[09-Jul-2026 11:41:23 Europe/Moscow] PHP Fatal error:  Uncaught Error: Call to undefined method classes\User::create() in /home/s/s90483x2/amer_zone/public_html/api/register.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/s/s90483x2/amer_zone/public_html/api/register.php on line 57

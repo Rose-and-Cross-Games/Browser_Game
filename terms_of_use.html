@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/SMART/style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>SMART</title>
+</head>
+<body class="gamma-theme">
+    <!-- Экран загрузки SMART -->
+    <div id="smart-boot-screen" class="smart-boot-screen">
+        <div class="boot-loader">
+            <div class="boot-logo">
+                <span class="logo-text">S.M.A.R.T.</span>
+                <span class="logo-subtext">PORTABLE DIGITAL ASSISTANT</span>
+            </div>
+
+            <div class="boot-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="boot-progress"></div>
+                </div>
+                <div class="boot-messages">
+                    <div class="boot-message" id="boot-message">Инициализация системы...</div>
+                </div>
+            </div>
+        
+            <div class="boot-version">v2.5.7 // GLOBAL EDITION</div>
+        </div>
+    </div>
+
+    <!-- Основной интерфейс SMART -->
+    <div id="smart-interface" class="smart-interface" style="display: none; opacity: 0;">
+        <div class="smart-header">
+            <div class="smart-time" id="smart-time">--:--</div>
+            <div class="smart-battery">87%</div>
+        </div>
+
+        <div class="smart-main">
+            <div class="smart-sidebar">
+                <div class="smart-status">
+                    <div class="status-item">
+                        <span class="status-icon">Username:</span>
+                        <span class="status-value"></span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-icon">❤️</span>
+                        <span class="status-value"></span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-icon">☢️</span>
+                        <span class="status-value"></span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-icon"></span>
+                        <span class="status-value"></span>
+                    </div>
+                </div>
+                <div class="smart-quicknav">
+                    <button class="quicknav-btn" data-tab="map">
+                        <span class="nav-icon">🗺️</span>
+                        <span class="nav-text">Карта</span>
+                    </button>
+                    <button class="quicknav-btn" data-tab="inventory">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Инвентарь</span>
+                    </button>
+                    <button class="quicknav-btn" data-tab="trade">
+                        <span class="nav-icon">💰</span>
+                        <span class="nav-text">Торговля</span>
+                    </button>
+                </div>
+            </div>
+        
+            <div class="smart-content">
+                <div class="logo">
+                    <a href="/main.php">
+                        <img src="/img/logo/rad.gif" alt="Логотип">
+                    </a>
+                </div>
+            
+                <div class="indexBg" style="font-size:1.1em;color:#aaa;text-shadow: 1px 1px black; ">
+                    <div style="text-align: center; font-size: 1.2em; padding: 4px; color: orange; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        Пользовательское соглашение.
+                    </div>
+                    <div class = "npc_text" style = "padding: 8px; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        <p>Пожалуйста, прочитайте данное Пользовательское Соглашение (далее - ПС), перед использованием игры "Идеальная Зона" (далее - Проект).</p>
+                        <p>Использование Проекта подразумевает, что Пользователь (далее - Клиент) принимает условия данного ПС.</p>
+                        <p>Проект может распространяться бесплатно, при условии сохранения в неизменном виде дистрибутива, без письменного разрешения Обладателя Авторских Прав (далее - Правообладатель).</p>
+                    </div>    
+                    <div style = "text-align: center; font-size: 1.2em; padding: 4px; color: orange; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        1. Ограничения по гарантийным обязательствам:
+                    </div>
+                    <div class = "npc_text" style = "padding: 8px; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        <b style = "color: orange">1.1</b>
+                        Клиент не в праве видоизменять, сдавать в аренду, продавать и модифицировать Проект, без письменного разрешения Правообладателя.
+                        Любое подобное неавторизованное использование Проекта, влечет за собой немедленное аннулирование договора Лицензионного Соглашения (далее - Лицензия), в одностороннем порядке со стороны Правообладателя, с последующим преследованием Клиента, согласно Уголовного и/или Гражданского Законодательства Российской Федерации "Об авторском праве".
+                        Данное программное обеспечение (далее - ПО), и сопутствующие файлы, предоставляются, в рамках данного соглашения между Правообладателем и Клиентом, в том виде, "как есть". Без гарантий к эксплуатации, и прочих гарантий, выраженных, или подразумеваемых.
+                        Гарантия товарной ценности, или пригодности для определенных целей - не предоставляется.
+                        Клиент целиком принимает на себя риск, связанный с использованием данного ПО.
+                        Правообладатель не несет ответственности за любые последствия, прямой и/или непрямой, а так же специальный и/или косвенный ущерб, вызванный использованием данного ПО.
+                    </div>
+                    <div style = "text-align: center; font-size: 1.2em; padding: 4px; color: orange; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        2. Положение о добровольных отчислениях (далее - Донат), в пользу Правообладателя Проекта:
+                    </div>
+                    <div class = "npc_text" style = "padding: 8px; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        Проект позиционирует себя, как Условно Бесплатная игра, распространяемая по системе "Free to Play", что подразумевает под собой, возможность комфортного игрового процесса, без Донат-вливаний.
+                        Администратор Проекта волен добавлять любые предметы в Проект, в пользу Клиента, Добровольно пожертвовавшего, определенные суммы денежных средств, в пользу Проекта. С учетом того, что данные игровые предметы, не вызовут критического нарушения игрового баланса, и не станут причиной невозможности дальнейшего игрового процесса, для других Клиентов.
+                        Администратор не в праве требовать от клиента Донат-вливаний. Все операции, связанные с введением денежных сумм на счета Администратора, производятся только в Добровольном порядке.
+                        Администратор обязуется предоставить Клиенту предметы в том виде, в котором они были заказаны Клиентом, при условии полной оплаты заказа, с учетом скидок, акций, налогов и текущего уровня инфляции.
+                        При отсутствии заказа на определенные игровые предметы, все Добровольные Донат-вливания в пользу проекта, конвертируются в единицы внешнеигровой валюты по текущему курсу, с последующим зачислением на виртуальный счет аккаунта Клиента в полном объеме, с учетом скидок, акций, налогов и текущего уровня инфляции.
+                        Администратор вправе отказать Клиенту в заказе определенных предметов, с полным зачислением внешнеигровой валюты на виртуальный счет Клиента, если заказ противоречит условию сохранения игрового баланса, и/или невозможности продолжения игровой активности других Клиентов, и/или невозможности (реальной либо вымышленной) создания данного предмета в рамках данного Проекта.
+                        Зачисление внешнеигровой валюты на виртуальный счет аккаунта Клиента и/или выполнение заказа выполняется Администратором Проекта, в сроки, заранее прописанные Администратором, во время обсуждения заказа с Клиентом. За исключением форс-мажорных обстоятельств, о которых, Клиента может уведомить, как сам Администратор, так и модераторский состав.
+                        аличие форс-мажорной ситуации не означает, что Клиент может получить скидку, либо другой бонус от Администратора, при выполнении заказа и/или зачисления внешнеигровой валюты на виртуальный счет аккаунта Клиента.
+                        Добровольные Донат-отчисления не дают никаких дополнительных привилегий для Клиента, будь то - иммунитет к наказаниям при нарушении правил Проекта, или же обслуживание заказа вне очереди.
+                        Производя Донат-вливание в пользу Проекта, Клиент обязан отдавать себе отчет в том, что делает он это в абсолютно добровольном порядке, и только Клиент вправе решить, делать ему Донат-вложение в Проект, или не делать.
+                    </div>
+                    <div style = "text-align: center; font-size: 1.2em; padding: 4px; color: orange; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        Изменения Саглашения.
+                    </div>
+                    <div class = "npc_text" style = "padding: 8px; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                        Настоящее Соглашение может быть изменено или прекращено Администрацией в одностороннем порядке без предварительного уведомления Пользователя и без выплаты какой-либо компенсации в связи с этим.
+                    </div>
+                    <br>
+                    <div style="text-align: center;">
+                        <label>
+                            <input type="checkbox" id="agreementCheckbox"> Я принимаю условия соглашения
+                        </label>
+                    </div>
+                    <br>
+                    <div style="text-align: center;">
+                        <button class="button" id="rejectButton" onclick="rejectAgreement()">Отклонить</button>
+                        <button class="button" id="acceptButton" onclick="acceptAgreement()" disabled>Принять</button>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    
+        <div class="smart-footer">
+            <div class="smart-tabs">
+                <button class="tab-btn active" data-tab="desktop">Рабочий стол</button>
+                <button class="tab-btn" data-tab="inventory">Инвентарь</button>
+                <a href="/map/map.php"><button class="tab-btn" data-tab="map">Карта</button></a>
+                <button class="tab-btn" data-tab="quests">Задания</button>
+                <a href="/exit.php" ><button  class="tab-btn" data-tab="quests">Выход</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Контент вкладок -->
+    <div id="tab-content" class="tab-content" style="display: none;">
+        <button class="back-btn" id="back-to-desktop">Назад</button>
+        <div id="current-tab-content"></div>
+    </div>
+
+    <script>
+        // SMART Boot Sequence
+        document.addEventListener('DOMContentLoaded', function() {
+            const bootScreen = document.getElementById('smart-boot-screen');
+            const smartInterface = document.getElementById('smart-interface');
+            const bootProgress = document.getElementById('boot-progress');
+            const bootMessage = document.getElementById('boot-message');
+            const smartTime = document.getElementById('smart-time');
+
+            // Boot messages sequence
+            const bootMessages = [
+                { text: "Инициализация системы...", progress: 20 },
+                { text: "Загрузка ядра...", progress: 40 },
+                { text: "Инициализация интерфейса...", progress: 60 },
+                { text: "Загрузка пользовательского соглашения...", progress: 80 },
+                { text: "Готово", progress: 100 }
+            ];
+
+            let currentMessage = 0;
+
+            function updateBootProgress() {
+                if (currentMessage < bootMessages.length) {
+                    const message = bootMessages[currentMessage];
+                    bootMessage.textContent = message.text;
+                    bootProgress.style.width = message.progress + '%';
+                    
+                    currentMessage++;
+                    
+                    if (currentMessage < bootMessages.length) {
+                        setTimeout(updateBootProgress, 800);
+                    } else {
+                        // Boot complete
+                        setTimeout(completeBoot, 1000);
+                    }
+                }
+            }
+
+            function completeBoot() {
+                // Hide boot screen
+                bootScreen.style.opacity = '0';
+                bootScreen.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    bootScreen.style.display = 'none';
+                    
+                    // Show smart interface
+                    smartInterface.style.display = 'flex';
+                    setTimeout(() => {
+                        smartInterface.style.opacity = '1';
+                        smartInterface.style.transition = 'opacity 0.5s ease';
+                    }, 50);
+                    
+                    // Start system time
+                    updateSystemTime();
+                    setInterval(updateSystemTime, 1000);
+                    
+                }, 500);
+            }
+
+            function updateSystemTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                smartTime.textContent = `${hours}:${minutes}`;
+            }
+
+            // Обработка чекбокса соглашения
+            const agreementCheckbox = document.getElementById('agreementCheckbox');
+            const acceptButton = document.getElementById('acceptButton');
+            
+            if (agreementCheckbox && acceptButton) {
+                agreementCheckbox.addEventListener('change', function() {
+                    acceptButton.disabled = !this.checked;
+                });
+            }
+
+            // Функции для кнопок соглашения
+            window.rejectAgreement = function() {
+                if (confirm('Вы уверены, что хотите отклонить соглашение? Это приведет к выходу из системы.')) {
+                    window.location.href = '/index.php';
+                }
+            };
+
+            window.acceptAgreement = function() {
+                // Сохраняем в localStorage что соглашение принято
+                localStorage.setItem('agreementAccepted', 'true');
+                localStorage.setItem('agreementAcceptedDate', new Date().toISOString());
+                
+                // Показываем сообщение об успехе
+                alert('Соглашение успешно принято!');
+                
+                // Перенаправляем на главную страницу
+                window.location.href = '/main.php';
+            };
+
+            // Проверяем, было ли уже принято соглашение
+            function checkAgreementStatus() {
+                const accepted = localStorage.getItem('agreementAccepted');
+                if (accepted === 'true') {
+                    // Если соглашение уже принято, показываем соответствующее сообщение
+                    const contentDiv = document.querySelector('.indexBg');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = `
+                            <div style="text-align: center; font-size: 1.2em; padding: 4px; color: #44ff44; border: 1px solid #333; margin-left: -10px; margin-right: -10px">
+                                Соглашение принято
+                            </div>
+                            <div style="padding: 8px; border: 1px solid #333; margin-left: -10px; margin-right: -10px; text-align: center;">
+                                <p>Вы уже приняли пользовательское соглашение.</p>
+                                <p>Можете продолжить использование системы.</p>
+                                <br>
+                                <a href="/main.php" class="button" style="display: inline-block; margin: 10px;">Перейти к системе</a>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            // Start boot sequence
+            setTimeout(updateBootProgress, 1000);
+            checkAgreementStatus();
+        });
+
+        // Добавляем базовые стили для кнопок если их нет в CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            .button {
+                background: #222;
+                border: 1px solid var(--smart-border);
+                color: var(--smart-text);
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-align: center;
+                font-family: 'Roboto Mono', monospace;
+                text-decoration: none;
+                display: inline-block;
+                margin: 0 5px;
+            }
+            
+            .button:hover {
+                border-color: var(--smart-green);
+                background: #333;
+            }
+            
+            .button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            
+            .button:disabled:hover {
+                border-color: var(--smart-border);
+                background: #222;
+            }
+            
+            .logo {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            
+            .logo img {
+                max-width: 100px;
+                height: auto;
+            }
+            
+            .npc_text p {
+                margin-bottom: 1rem;
+                line-height: 1.5;
+            }
+            
+            .indexBg {
+                max-height: 60vh;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
+            
+            .indexBg::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            .indexBg::-webkit-scrollbar-track {
+                background: #222;
+                border-radius: 4px;
+            }
+            
+            .indexBg::-webkit-scrollbar-thumb {
+                background: var(--smart-green);
+                border-radius: 4px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+    <script src="/SMART/style/script.js"></script>
+</body>
+</html>
