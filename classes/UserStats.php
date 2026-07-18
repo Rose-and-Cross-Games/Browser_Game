@@ -151,5 +151,20 @@ class UserStats {
             throw new \Exception("Ошибка обновления радиации: " . $e->getMessage());
         }
     }
+
+    /**
+     * Обновить позицию игрока
+     */
+    public function updatePosition(int $userId, string $location, int $x, int $y): bool {
+        $stmt = $this->db->getConnection()->prepare(
+            "UPDATE user_stats SET 
+                location = ?, 
+                position_x = ?, 
+                position_y = ?,
+                updated_at = CURRENT_TIMESTAMP 
+            WHERE user_id = ?"
+        );
+        return $stmt->execute([$location, $x, $y, $userId]);
+    }
 }
 ?>

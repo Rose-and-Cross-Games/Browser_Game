@@ -19,6 +19,7 @@ $isAuthenticated = isset($_SESSION['user_id']);
     <?php endif; ?>
 
     <?php require_once __DIR__ . '/views/game_screen.php'; ?>
+    <?php require_once __DIR__ . '/views/map_screen.php'; ?>
 
     <!-- Подключаем JS модули -->
     <script src="<?= JS_URL ?>api.js"></script>
@@ -26,5 +27,7 @@ $isAuthenticated = isset($_SESSION['user_id']);
     <script src="<?= JS_URL ?>ui.js"></script>
     <script src="<?= JS_URL ?>scenes.js"></script>
     <script src="<?= JS_URL ?>auth.js"></script>
+    <script src="<?= JS_URL ?>map.js"></script>
+    <script src="<?= JS_URL ?>main.js"></script>
 </body>
 </html>

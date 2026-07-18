@@ -47,5 +47,10 @@
         <div class="game-log" id="game-log">
             <p>🎮 Добро пожаловать в Amer Zone!</p>
         </div>
+
+        <!-- Карта (отдельный экран) -->
+        <div id="map-screen" style="display: none;">
+            <!-- Содержимое карты из map_screen.php -->
+        </div>
     </div>
 </div>

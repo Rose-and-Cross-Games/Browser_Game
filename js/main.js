@@ -5,6 +5,10 @@ const Game = {
         if (loaded) {
             Player.updateUI();
             UI.addLogMessage("🎮 Ты вошёл в Зону. Твоё приключение начинается!");
+            
+            // Показываем начальный экран игры (с диалогом)
+            UI.showScreen('game');
+            Scenes.startTutorial();
         } else {
             UI.addLogMessage("⚠️ Не удалось загрузить данные игрока");
         }
